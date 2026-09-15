@@ -4,6 +4,7 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import model.StudentInfo;
 
 import java.io.Serializable;
 
@@ -12,9 +13,11 @@ import java.io.Serializable;
 public class StudentFormBean implements Serializable {
     private int submissionCount; //getter
 
-    private String fullName; //getter and setter
-    private String program; //getter and setter
-    private boolean fullTime; //getter and setter
+    private StudentInfo studentInfo = new StudentInfo();
+
+    public StudentInfo getStudentInfo() {
+        return studentInfo;
+    }
 
     public void submit() {
         submissionCount++;
@@ -23,44 +26,16 @@ public class StudentFormBean implements Serializable {
                 FacesMessage.SEVERITY_INFO,
                 "Form Submitted",
                 String.format("Welcome %s to %s program (%s)",
-                        fullName,
-                        program,
-                        fullTime ? "Full Time" : "Part Time")
+                        studentInfo.getFullName(),
+                        studentInfo.getProgram(),
+                        studentInfo.isFullTime() ? "Full Time" : "Part Time")
         );
         FacesContext.getCurrentInstance()
                 .addMessage(null, message);
-        fullName = null;
-        program = null;
-        fullTime = true;
+        studentInfo = new StudentInfo();
     }
 
 
 
-    public int getSubmissionCount() {
-        return submissionCount;
-    }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getProgram() {
-        return program;
-    }
-
-    public void setProgram(String program) {
-        this.program = program;
-    }
-
-    public boolean isFullTime() {
-        return fullTime;
-    }
-
-    public void setFullTime(boolean fullTime) {
-        this.fullTime = fullTime;
-    }
 }
