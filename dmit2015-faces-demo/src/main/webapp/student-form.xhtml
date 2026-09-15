@@ -52,6 +52,30 @@
 
             <h:outputText value="Successful submissions: #{studentFormBean.submissionCount}" />
         </p:panel>
+
+        <p:dataTable id="studentsDataTable"
+                     value="#{studentListSession.students}"
+                     variable="currentStudent">
+            <p:column headerText="Full Name">
+                <h:outputText value="#{currentStudent.fullName}" />
+            </p:column>
+
+            <p:column headerText="Program">
+                <h:outputText value="#{currentStudent.program}" />
+            </p:column>
+
+            <p:column>
+                <p:selectBooleanCheckbox value="#{currentStudent.fullTime}"
+                                         disabled="true" />
+            </p:column>
+
+            <p:column headerText="Action">
+                <p:commandButton value="Remove"
+                                 action="#{studentListSession.remove(currentStudent)}"
+                                 process="@this"
+                                 update="studentDataTable" />
+            </p:column>
+        </p:dataTable>
     </h:form>
 </h:body>
 </html>

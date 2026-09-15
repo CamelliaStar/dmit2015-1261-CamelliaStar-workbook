@@ -5,10 +5,6 @@ public class StudentInfo {
     private String program; //getter and setter
     private boolean fullTime; //getter and setter
 
-    public int getSubmissionCount() {
-        return submissionCount;
-    }
-
     public String getFullName() {
         return fullName;
     }

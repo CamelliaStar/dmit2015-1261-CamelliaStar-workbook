@@ -3,6 +3,7 @@ package view;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import model.StudentInfo;
 
@@ -13,14 +14,26 @@ import java.io.Serializable;
 public class StudentFormBean implements Serializable {
     private int submissionCount; //getter
 
+    @Inject
+    private StudentListSession studentListSession;
+
     private StudentInfo studentInfo = new StudentInfo();
 
     public StudentInfo getStudentInfo() {
         return studentInfo;
     }
 
+    public void removeStudent(StudentInfo existingStudentInfo) {
+        studentListSession.remove(existingStudentInfo);
+    }
+
+    public int getSubmissionCount() {
+        return submissionCount;
+    }
+
     public void submit() {
         submissionCount++;
+        studentListSession.add(studentInfo);
 
         FacesMessage message = new FacesMessage(
                 FacesMessage.SEVERITY_INFO,
