@@ -26,7 +26,9 @@ import java.util.List;
 public class StudentCrudView implements Serializable {
 
     @Inject
-    @Named("memoryStudentService")
+    //@Named("memoryStudentService")
+    //@Named("firebaseHttpClientStudentService")
+    @Named("firebaseMultiTenantHttpClientStudentService")
     private StudentService studentService;
 
     /**
